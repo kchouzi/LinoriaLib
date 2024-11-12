@@ -9,6 +9,7 @@
 - Dependency boxes, allowing you to easily hide/show UI elements depending on the state of other UI elements
 
 # 🔨Credits
+- Kchouzi: Fixing the code, adding new functions ( not original dev )
 - Inori: Main developer.
 - Wally: Cleaning up verbose code, extending library functionality.
 - Stefanuk: Extending library functionality.
