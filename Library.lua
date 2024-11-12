@@ -17,12 +17,6 @@ ProtectGui(ScreenGui);
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global;
 ScreenGui.Parent = CoreGui;
 
-local Toggles = {};
-local Options = {};
-
-getgenv().Toggles = Toggles;
-getgenv().Options = Options;
-
 local Library = {
     Registry = {};
     RegistryMap = {};
@@ -44,6 +38,9 @@ local Library = {
 
     Signals = {};
     ScreenGui = ScreenGui;
+
+    Toggles = {};
+    Options = {};
 };
 
 local RainbowStep = 0
@@ -995,7 +992,7 @@ do
         ColorPicker:Display();
         ColorPicker.DisplayFrame = DisplayFrame
 
-        Options[Idx] = ColorPicker;
+        Library.Options[Idx] = ColorPicker;
 
         return self;
     end;
@@ -1322,7 +1319,7 @@ do
 
         KeyPicker:Update();
 
-        Options[Idx] = KeyPicker;
+        Library.Options[Idx] = KeyPicker;
 
         return self;
     end;
@@ -1809,7 +1806,7 @@ do
         Groupbox:AddBlank(5);
         Groupbox:Resize();
 
-        Options[Idx] = Textbox;
+        Library.Options[Idx] = Textbox;
 
         return Textbox;
     end;
@@ -1945,13 +1942,9 @@ do
         Toggle.Container = Container;
         setmetatable(Toggle, BaseAddons);
 
-        Toggles[Idx] = Toggle;
+        Library.Toggles[Idx] = Toggle;
 
         Library:UpdateDependencyBoxes();
-
-        Library:OnUnload(function()
-            Toggles[Idx] = nil
-        end)
         
         return Toggle;
     end;
@@ -2147,11 +2140,7 @@ do
         Groupbox:AddBlank(Info.BlankSize or 6);
         Groupbox:Resize();
 
-        Options[Idx] = Slider;
-
-        Library:OnUnload(function()
-            Options[Idx] = nil
-        end)
+        Library.Options[Idx] = Slider;
 
         return Slider;
     end;
@@ -2598,7 +2587,7 @@ do
         Groupbox:AddBlank(Info.BlankSize or 5);
         Groupbox:Resize();
 
-        Options[Idx] = Dropdown;
+        Library.Options[Idx] = Dropdown;
 
         return Dropdown;
     end;
