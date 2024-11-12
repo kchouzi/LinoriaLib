@@ -1,5 +1,6 @@
-# 🔧Latest Update ( v1.0 )
+# 🔧Latest Update ( v1.01 )
 - Removed custom mouseicon
+- Fixed multiple laucnh
 
 # 🎉Features
 - Tabs, group boxes, and tab boxes
