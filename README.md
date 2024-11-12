@@ -1,5 +1,7 @@
+# 🔧Latest Update ( v1.0 )
+- Removed custom mouseicon
+
 # 🎉Features
-- Removed custom cursor
 - Tabs, group boxes, and tab boxes
 - Almost any UI element you would ever need (toggles, sliders, dropdowns, etc)
 - Interface automatically becomes scrollable whenever there are too many UI elements
