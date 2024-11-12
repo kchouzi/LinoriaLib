@@ -1949,6 +1949,10 @@ do
 
         Library:UpdateDependencyBoxes();
 
+        Library:OnUnload(function()
+            Toggles[Idx] = nil
+        end)
+        
         return Toggle;
     end;
 
@@ -2144,6 +2148,10 @@ do
         Groupbox:Resize();
 
         Options[Idx] = Slider;
+
+        Library:OnUnload(function()
+            Options[Idx] = nil
+        end)
 
         return Slider;
     end;
