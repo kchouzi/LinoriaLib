@@ -4,7 +4,6 @@ local SaveManager = {}
 
 do
 	SaveManager.Folder = 'LinoriaLibSettings'
-	SaveManager.Library = Library
 	SaveManager.Ignore = {}
 	SaveManager.Parser = {
 		Toggle = {
@@ -181,6 +180,10 @@ do
 		end
 
 		return out
+	end
+
+	function SaveManager:SetLibrary(library)
+		self.Library = library
 	end
 
 	function SaveManager:LoadAutoloadConfig()
