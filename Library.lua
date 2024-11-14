@@ -33,15 +33,16 @@ local Library = {
 	Black = Color3.new(0, 0, 0);
 	Font = Enum.Font.Code,
 
+	Toggles = {};
+	Options = {};
+
 	OpenedFrames = {};
 	DependencyBoxes = {};
 
 	Signals = {};
 	ScreenGui = ScreenGui;
-
-	Toggles = {};
-	Options = {};
 };
+getgenv().Library = Library
 
 local RainbowStep = 0
 local Hue = 0
