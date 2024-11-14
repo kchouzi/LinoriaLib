@@ -12,11 +12,6 @@ do
 				return { type = 'Toggle', idx = idx, value = object.Value } 
 			end,
 			Load = function(idx, data)
-				for i,v in pairs(self.Library) do
-					print("-------")
-					print(i, v)
-				end
-				
 				if SaveManager.Library.Toggles[idx] then 
 					SaveManager.Library.Toggles[idx]:SetValue(data.value)
 				end
