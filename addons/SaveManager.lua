@@ -13,7 +13,7 @@ do
 				return { type = 'Toggle', idx = idx, value = object.Value } 
 			end,
 			Load = function(idx, data)
-				print( self.Library)
+				print(self.Library.Toggles)
 				
 				if self.Library.Toggles[idx] then 
 					self.Library.Toggles[idx]:SetValue(data.value)
