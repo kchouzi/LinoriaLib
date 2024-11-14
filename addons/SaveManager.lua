@@ -5,7 +5,6 @@ local SaveManager = {}
 do
 	SaveManager.Folder = 'LinoriaLibSettings'
 
-	SaveManager.Library = nil
 	SaveManager.Ignore = {}
 	SaveManager.Parser = {
 		Toggle = {
@@ -13,8 +12,8 @@ do
 				return { type = 'Toggle', idx = idx, value = object.Value } 
 			end,
 			Load = function(idx, data)
-				if SaveManager.Library.Toggles[idx] then 
-					SaveManager.Library.Toggles[idx]:SetValue(data.value)
+				if self.Library.Toggles[idx] then 
+					Library.Toggles[idx]:SetValue(data.value)
 				end
 			end,
 		},
@@ -23,8 +22,8 @@ do
 				return { type = 'Slider', idx = idx, value = tostring(object.Value) }
 			end,
 			Load = function(idx, data)
-				if SaveManager.Library.Options[idx] then 
-					SaveManager.Library.Options[idx]:SetValue(data.value)
+				if self.Library.Options[idx] then 
+					self.Library.Options[idx]:SetValue(data.value)
 				end
 			end,
 		},
@@ -33,8 +32,8 @@ do
 				return { type = 'Dropdown', idx = idx, value = object.Value, mutli = object.Multi }
 			end,
 			Load = function(idx, data)
-				if SaveManager.Library.Options[idx] then 
-					SaveManager.Library.Options[idx]:SetValue(data.value)
+				if self.Library.Options[idx] then 
+					self.Library.Options[idx]:SetValue(data.value)
 				end
 			end,
 		},
@@ -43,8 +42,8 @@ do
 				return { type = 'ColorPicker', idx = idx, value = object.Value:ToHex(), transparency = object.Transparency }
 			end,
 			Load = function(idx, data)
-				if SaveManager.Library.Options[idx] then 
-					SaveManager.Library.Options[idx]:SetValueRGB(Color3.fromHex(data.value), data.transparency)
+				if self.Library.Options[idx] then 
+					self.Library.Options[idx]:SetValueRGB(Color3.fromHex(data.value), data.transparency)
 				end
 			end,
 		},
@@ -53,8 +52,8 @@ do
 				return { type = 'KeyPicker', idx = idx, mode = object.Mode, key = object.Value }
 			end,
 			Load = function(idx, data)
-				if SaveManager.Library.Options[idx] then 
-					SaveManager.Library.Options[idx]:SetValue({ data.key, data.mode })
+				if self.Library.Options[idx] then 
+					self.Library.Options[idx]:SetValue({ data.key, data.mode })
 				end
 			end,
 		},
