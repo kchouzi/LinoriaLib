@@ -1,6 +1,7 @@
-# 🔧Latest Update ( v1.01 )
+# 🔧Latest Update ( v1.02 )
 - Removed custom mouseicon
 - Fixed multiple laucnh
+- Fixed addons
 
 # 🎉Features
 - Tabs, group boxes, and tab boxes
