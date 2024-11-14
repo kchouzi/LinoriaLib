@@ -17,8 +17,8 @@ do
 					print(i, v)
 				end
 				
-				if self.Library.Toggles[idx] then 
-					self.Library.Toggles[idx]:SetValue(data.value)
+				if SaveManager.Library.Toggles[idx] then 
+					SaveManager.Library.Toggles[idx]:SetValue(data.value)
 				end
 			end,
 		},
