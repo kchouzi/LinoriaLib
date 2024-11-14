@@ -4,6 +4,8 @@ local SaveManager = {}
 
 do
 	SaveManager.Folder = 'LinoriaLibSettings'
+
+	SaveManager.Library = nil
 	SaveManager.Ignore = {}
 	SaveManager.Parser = {
 		Toggle = {
