@@ -1,5 +1,8 @@
 local httpService = game:GetService('HttpService')
-local ThemeManager = {} do
+
+local ThemeManager = {}
+
+do
 	ThemeManager.Folder = 'LinoriaLibSettings'
 	-- if not isfolder(ThemeManager.Folder) then makefolder(ThemeManager.Folder) end
 
@@ -26,9 +29,9 @@ local ThemeManager = {} do
 		local scheme = data[2]
 		for idx, col in next, customThemeData or scheme do
 			self.Library[idx] = Color3.fromHex(col)
-			
-			if Options[idx] then
-				Options[idx]:SetValueRGB(Color3.fromHex(col))
+
+			if local InputService = game:GetService('UserInputService');
+				Library.Options[idx]:SetValueRGB(Color3.fromHex(col))
 			end
 		end
 
@@ -39,8 +42,8 @@ local ThemeManager = {} do
 		-- This allows us to force apply themes without loading the themes tab :)
 		local options = { "FontColor", "MainColor", "AccentColor", "BackgroundColor", "OutlineColor" }
 		for i, field in next, options do
-			if Options and Options[field] then
-				self.Library[field] = Options[field].Value
+			if Library.Options and Library.Options[field] then
+				self.Library[field] = Library.Options[field].Value
 			end
 		end
 
@@ -61,11 +64,11 @@ local ThemeManager = {} do
 				isDefault = false;
 			end
 		elseif self.BuiltInThemes[self.DefaultTheme] then
-		 	theme = self.DefaultTheme
+			theme = self.DefaultTheme
 		end
 
 		if isDefault then
-			Options.ThemeManager_ThemeList:SetValue(theme)
+			Library.Options.ThemeManager_ThemeList:SetValue(theme)
 		else
 			self:ApplyTheme(theme)
 		end
@@ -93,37 +96,37 @@ local ThemeManager = {} do
 		groupbox:AddDropdown('ThemeManager_ThemeList', { Text = 'Theme list', Values = ThemesArray, Default = 1 })
 
 		groupbox:AddButton('Set as default', function()
-			self:SaveDefault(Options.ThemeManager_ThemeList.Value)
-			self.Library:Notify(string.format('Set default theme to %q', Options.ThemeManager_ThemeList.Value))
+			self:SaveDefault(Library.Options.ThemeManager_ThemeList.Value)
+			self.Library:Notify(string.format('Set default theme to %q', Library.Options.ThemeManager_ThemeList.Value))
 		end)
 
-		Options.ThemeManager_ThemeList:OnChanged(function()
-			self:ApplyTheme(Options.ThemeManager_ThemeList.Value)
+		Library.Options.ThemeManager_ThemeList:OnChanged(function()
+			self:ApplyTheme(Library.Options.ThemeManager_ThemeList.Value)
 		end)
 
 		groupbox:AddDivider()
 		groupbox:AddInput('ThemeManager_CustomThemeName', { Text = 'Custom theme name' })
 		groupbox:AddDropdown('ThemeManager_CustomThemeList', { Text = 'Custom themes', Values = self:ReloadCustomThemes(), AllowNull = true, Default = 1 })
 		groupbox:AddDivider()
-		
-		groupbox:AddButton('Save theme', function() 
-			self:SaveCustomTheme(Options.ThemeManager_CustomThemeName.Value)
 
-			Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
-			Options.ThemeManager_CustomThemeList:SetValue(nil)
+		groupbox:AddButton('Save theme', function() 
+			self:SaveCustomTheme(Library.Options.ThemeManager_CustomThemeName.Value)
+
+			Library.Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
+			Library.Options.ThemeManager_CustomThemeList:SetValue(nil)
 		end):AddButton('Load theme', function() 
-			self:ApplyTheme(Options.ThemeManager_CustomThemeList.Value) 
+			self:ApplyTheme(Library.Options.ThemeManager_CustomThemeList.Value) 
 		end)
 
 		groupbox:AddButton('Refresh list', function()
-			Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
-			Options.ThemeManager_CustomThemeList:SetValue(nil)
+			Library.Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
+			Library.Options.ThemeManager_CustomThemeList:SetValue(nil)
 		end)
 
 		groupbox:AddButton('Set as default', function()
-			if Options.ThemeManager_CustomThemeList.Value ~= nil and Options.ThemeManager_CustomThemeList.Value ~= '' then
-				self:SaveDefault(Options.ThemeManager_CustomThemeList.Value)
-				self.Library:Notify(string.format('Set default theme to %q', Options.ThemeManager_CustomThemeList.Value))
+			if Library.Options.ThemeManager_CustomThemeList.Value ~= nil and Library.Options.ThemeManager_CustomThemeList.Value ~= '' then
+				self:SaveDefault(Library.Options.ThemeManager_CustomThemeList.Value)
+				self.Library:Notify(string.format('Set default theme to %q', Library.Options.ThemeManager_CustomThemeList.Value))
 			end
 		end)
 
@@ -133,11 +136,11 @@ local ThemeManager = {} do
 			self:ThemeUpdate()
 		end
 
-		Options.BackgroundColor:OnChanged(UpdateTheme)
-		Options.MainColor:OnChanged(UpdateTheme)
-		Options.AccentColor:OnChanged(UpdateTheme)
-		Options.OutlineColor:OnChanged(UpdateTheme)
-		Options.FontColor:OnChanged(UpdateTheme)
+		Library.Options.BackgroundColor:OnChanged(UpdateTheme)
+		Library.Options.MainColor:OnChanged(UpdateTheme)
+		Library.Options.AccentColor:OnChanged(UpdateTheme)
+		Library.Options.OutlineColor:OnChanged(UpdateTheme)
+		Library.Options.FontColor:OnChanged(UpdateTheme)
 	end
 
 	function ThemeManager:GetCustomTheme(file)
@@ -148,7 +151,7 @@ local ThemeManager = {} do
 
 		local data = readfile(path)
 		local success, decoded = pcall(httpService.JSONDecode, httpService, data)
-		
+
 		if not success then
 			return nil
 		end
