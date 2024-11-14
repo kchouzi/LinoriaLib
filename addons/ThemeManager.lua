@@ -42,7 +42,7 @@ do
 		-- This allows us to force apply themes without loading the themes tab :)
 		local options = { "FontColor", "MainColor", "AccentColor", "BackgroundColor", "OutlineColor" }
 		for i, field in next, options do
-			if Library.Options and Library.Options[field] then
+			if self.Library.Options and self.Library.Options[field] then
 				self.Library[field] = self.Library.Options[field].Value
 			end
 		end
