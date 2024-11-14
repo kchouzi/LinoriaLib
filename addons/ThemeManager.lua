@@ -29,9 +29,9 @@ do
 		local scheme = data[2]
 		for idx, col in next, customThemeData or scheme do
 			self.Library[idx] = Color3.fromHex(col)
-
-			if local InputService = game:GetService('UserInputService');
-				self.Library.Options[idx]:SetValueRGB(Color3.fromHex(col))
+			
+			if Options[idx] then
+				Options[idx]:SetValueRGB(Color3.fromHex(col))
 			end
 		end
 
