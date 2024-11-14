@@ -13,6 +13,8 @@ do
 				return { type = 'Toggle', idx = idx, value = object.Value } 
 			end,
 			Load = function(idx, data)
+				print(SaveManager.Library)
+				
 				if self.Library.Toggles[idx] then 
 					self.Library.Toggles[idx]:SetValue(data.value)
 				end
