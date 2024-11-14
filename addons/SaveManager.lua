@@ -183,10 +183,6 @@ do
 		return out
 	end
 
-	function SaveManager:SetLibrary(library)
-		self.Library = Library
-	end
-
 	function SaveManager:LoadAutoloadConfig()
 		if isfile(self.Folder .. '/settings/autoload.txt') then
 			local name = readfile(self.Folder .. '/settings/autoload.txt')
