@@ -31,7 +31,7 @@ do
 			self.Library[idx] = Color3.fromHex(col)
 
 			if local InputService = game:GetService('UserInputService');
-				Library.Options[idx]:SetValueRGB(Color3.fromHex(col))
+				self.Library.Options[idx]:SetValueRGB(Color3.fromHex(col))
 			end
 		end
 
@@ -43,7 +43,7 @@ do
 		local options = { "FontColor", "MainColor", "AccentColor", "BackgroundColor", "OutlineColor" }
 		for i, field in next, options do
 			if Library.Options and Library.Options[field] then
-				self.Library[field] = Library.Options[field].Value
+				self.Library[field] = self.Library.Options[field].Value
 			end
 		end
 
@@ -68,7 +68,7 @@ do
 		end
 
 		if isDefault then
-			Library.Options.ThemeManager_ThemeList:SetValue(theme)
+			self.Library.Options.ThemeManager_ThemeList:SetValue(theme)
 		else
 			self:ApplyTheme(theme)
 		end
@@ -112,19 +112,19 @@ do
 		groupbox:AddButton('Save theme', function() 
 			self:SaveCustomTheme(Library.Options.ThemeManager_CustomThemeName.Value)
 
-			Library.Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
-			Library.Options.ThemeManager_CustomThemeList:SetValue(nil)
+			self.Library.Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
+			self.Library.Options.ThemeManager_CustomThemeList:SetValue(nil)
 		end):AddButton('Load theme', function() 
 			self:ApplyTheme(Library.Options.ThemeManager_CustomThemeList.Value) 
 		end)
 
 		groupbox:AddButton('Refresh list', function()
-			Library.Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
-			Library.Options.ThemeManager_CustomThemeList:SetValue(nil)
+			self.Library.Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
+			self.Library.Options.ThemeManager_CustomThemeList:SetValue(nil)
 		end)
 
 		groupbox:AddButton('Set as default', function()
-			if Library.Options.ThemeManager_CustomThemeList.Value ~= nil and Library.Options.ThemeManager_CustomThemeList.Value ~= '' then
+			if self.Library.Options.ThemeManager_CustomThemeList.Value ~= nil and self.Library.Options.ThemeManager_CustomThemeList.Value ~= '' then
 				self:SaveDefault(Library.Options.ThemeManager_CustomThemeList.Value)
 				self.Library:Notify(string.format('Set default theme to %q', Library.Options.ThemeManager_CustomThemeList.Value))
 			end
@@ -136,11 +136,11 @@ do
 			self:ThemeUpdate()
 		end
 
-		Library.Options.BackgroundColor:OnChanged(UpdateTheme)
-		Library.Options.MainColor:OnChanged(UpdateTheme)
-		Library.Options.AccentColor:OnChanged(UpdateTheme)
-		Library.Options.OutlineColor:OnChanged(UpdateTheme)
-		Library.Options.FontColor:OnChanged(UpdateTheme)
+		self.Library.Options.BackgroundColor:OnChanged(UpdateTheme)
+		self.Library.Options.MainColor:OnChanged(UpdateTheme)
+		self.Library.Options.AccentColor:OnChanged(UpdateTheme)
+		self.Library.Options.OutlineColor:OnChanged(UpdateTheme)
+		self.Library.Options.FontColor:OnChanged(UpdateTheme)
 	end
 
 	function ThemeManager:GetCustomTheme(file)
@@ -168,7 +168,7 @@ do
 		local fields = { "FontColor", "MainColor", "AccentColor", "BackgroundColor", "OutlineColor" }
 
 		for _, field in next, fields do
-			theme[field] = Options[field].Value:ToHex()
+			theme[field] = self.Library.Options[field].Value:ToHex()
 		end
 
 		writefile(self.Folder .. '/themes/' .. file .. '.json', httpService:JSONEncode(theme))
